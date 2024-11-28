@@ -92,7 +92,7 @@ public class Pothole {
     public void setDetails(PotholeDetails details) {
         this.details = details;
     }
-    
+
     @Embeddable
     public static class Location {
         private Double latitude;

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,8 +26,8 @@ public class AppUser {
     private Integer id; // Primary key
 
     private String username;
-    
-    @JsonIgnore
+
+    @Column(unique = true)
     private String email;
     private String password;
     private Date date_created;
