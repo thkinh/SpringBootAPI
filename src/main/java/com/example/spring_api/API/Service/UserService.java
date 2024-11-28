@@ -9,14 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.spring_api.API.Model.AppUser;
 import com.example.spring_api.API.Repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.*;
+
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-
+    private String salt = BCrypt.gensalt();
+    
     public UserService() {}
     
 
@@ -35,10 +37,16 @@ public class UserService {
         }
     }
 
-    
+    public Integer getIDbyEmail(String email){
+        AppUser user = userRepository.findByEmail(email);
+        if (user != null) {
+            return user.getId();
+        }
+        return 0;
+    }
 
     public AppUser addUser(AppUser user) {
-        // Add custom logic if needed before saving
+        user.setPassword(BCrypt.hashpw(user.getPassword(), salt));        
         return userRepository.save(user); // Save user to the database
     }
 }

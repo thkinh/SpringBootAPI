@@ -29,6 +29,8 @@ public class Pothole {
 
     @Embedded
     private Location location;
+    @Embedded
+    private PotholeDetails details;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uID", nullable = false)
@@ -82,7 +84,15 @@ public class Pothole {
     public void setLocation(Location location) {
         this.location = location;
     }
+    
+    public PotholeDetails getDetails() {
+        return details;
+    }
 
+    public void setDetails(PotholeDetails details) {
+        this.details = details;
+    }
+    
     @Embeddable
     public static class Location {
         private Double latitude;

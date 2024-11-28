@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.web.server.ResponseStatusException;
 
 import com.example.spring_api.API.Model.AppUser;
+import com.example.spring_api.API.Model.UnverifiedUser;
 import com.example.spring_api.API.Service.UserService;
 
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("get/user")
+    @GetMapping("/get")
     public ResponseEntity<AppUser> getUserByID(@RequestParam(name = "id") Integer id) {
         // Get user from service layer
         Optional<AppUser> user = userService.getUserByID(id);
@@ -50,6 +51,33 @@ public class UserController {
             return ResponseEntity.status(404).body("User not found"); // Return 404 if no user found
         }
     }
+
+    @GetMapping("get/id")
+    public ResponseEntity<Integer> getIDbyEmail (@RequestParam(name = "email") String email){
+        Integer id = userService.getIDbyEmail(email);
+        if (id != 0) {
+            return ResponseEntity.ok(id);
+        }
+        return ResponseEntity.status(404).body(0);
+    }
+
+
+    @PostMapping("/password/getVerify")
+    public ResponseEntity<String> getVerifyCode(@RequestParam(name = "email") String email){
+        String verifyCode = "a20008";
+        try{
+            //TODO: Send mail to client before save to Verify table
+
+            UnverifiedUser user = new UnverifiedUser();
+            user.setEmail(email);
+            user.setvCode(verifyCode);
+            return ResponseEntity.status(404).body("Sent verify code to client");
+        }
+        catch(Exception e){
+            return ResponseEntity.status(404).body("Email does not exist");
+        }
+    } 
+
 
     @PostMapping("/add")
     public ResponseEntity<AppUser> addUser(@RequestBody AppUser user){
