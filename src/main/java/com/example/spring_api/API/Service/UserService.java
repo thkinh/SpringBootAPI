@@ -25,6 +25,7 @@ public class UserService {
         // Use findById which returns an Optional
         return userRepository.findById(id);
     }
+
     public String getUsernameByEmail(String email) {
         AppUser user = userRepository.findByEmail(email);
         if (user != null) {
@@ -33,6 +34,8 @@ public class UserService {
             return null; // Return null if the user is not found
         }
     }
+
+    
 
     public AppUser addUser(AppUser user) {
         // Add custom logic if needed before saving

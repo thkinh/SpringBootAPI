@@ -1,6 +1,8 @@
 package com.example.spring_api.API.Controller;
 
+import java.util.List;
 import java.util.Optional;
+
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,7 @@ public class PotholeController {
         this.potholeService = potholeService;
     }
 
-    @GetMapping("get")
+    @GetMapping("get-singlePH")
     public ResponseEntity<Pothole> getPothole(@RequestParam(name = "id") Integer id){
         Optional<Pothole> pothole = potholeService.getPothole(id);
 
@@ -35,7 +37,17 @@ public class PotholeController {
         return ResponseEntity.status(404).body(null);
     }
 
-    @PostMapping("path")
+    @GetMapping("get")
+    public ResponseEntity<List<Pothole>> getPothole(@RequestParam(name = "user") String username){
+        List<Pothole> potholes = potholeService.getPotholesByUsername(username);
+
+        if (!potholes.isEmpty()) {
+            return ResponseEntity.ok(potholes);
+        }
+        return ResponseEntity.status(404).body(null);
+    }
+
+    @PostMapping("add")
     public String addPothole(@RequestBody Pothole pothole) {
         try {
             potholeService.addPothole(pothole);
@@ -45,6 +57,4 @@ public class PotholeController {
             return e.getMessage();
         }
     }
-    
-
 }

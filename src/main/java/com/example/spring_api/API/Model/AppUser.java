@@ -1,15 +1,21 @@
 package com.example.spring_api.API.Model;
 
 import java.sql.Date;
+import java.util.List;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "app_user") 
+@Table(name = "app_User")
 public class AppUser {
 
     @Id
@@ -21,7 +27,19 @@ public class AppUser {
     private String password;
     private Date date_created;
 
-    // Getters and Setters
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference 
+    private List<Pothole> potholes;
+
+    public List<Pothole> getPotholes() {
+        return potholes;
+    }
+
+    public void setPotholes(List<Pothole> potholes) {
+        this.potholes = potholes;
+    }
+
+    // Getters and Setters...
     public Integer getId() {
         return id;
     }

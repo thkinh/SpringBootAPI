@@ -3,12 +3,17 @@ import java.sql.Date;
 
 import java.sql.Time;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -25,7 +30,18 @@ public class Pothole {
     @Embedded
     private Location location;
 
-    // Getters and setters...
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uID", nullable = false)
+    @JsonBackReference 
+    private AppUser appUser; 
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
 
     public Integer getId() {
         return id;
