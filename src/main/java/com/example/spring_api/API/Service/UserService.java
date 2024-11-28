@@ -1,5 +1,7 @@
 package com.example.spring_api.API.Service;
 
+import java.util.Optional;
+
 //import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class UserService {
     
 
 
+    public Optional<AppUser> getUserByID(Integer id) {
+        // Use findById which returns an Optional
+        return userRepository.findById(id);
+    }
     public String getUsernameByEmail(String email) {
         AppUser user = userRepository.findByEmail(email);
         if (user != null) {

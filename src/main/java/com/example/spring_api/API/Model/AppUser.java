@@ -1,5 +1,7 @@
 package com.example.spring_api.API.Model;
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "app_user") // Explicitly map to "app_user" table
+@Table(name = "app_user") 
 public class AppUser {
 
     @Id
@@ -17,6 +19,7 @@ public class AppUser {
     private String username;
     private String email;
     private String password;
+    private Date date_created;
 
     // Getters and Setters
     public Integer getId() {
@@ -50,4 +53,13 @@ public class AppUser {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
+    }
+
 }
