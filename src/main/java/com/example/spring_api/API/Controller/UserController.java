@@ -30,6 +30,17 @@ public class UserController {
         this.mailService = mailService;
     }
 
+    @GetMapping("/getByName")
+    public ResponseEntity<AppUser> getUserByName(@RequestParam(name = "name") String name){
+        Optional<AppUser> user = userService.getUserByUsername(name);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        }
+        else{
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
     @GetMapping("/get")
     public ResponseEntity<AppUser> getUserByID(@RequestParam(name = "id") Integer id) {
         // Get user from service layer

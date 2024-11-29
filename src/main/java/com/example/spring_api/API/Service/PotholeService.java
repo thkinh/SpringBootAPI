@@ -33,10 +33,10 @@ public class PotholeService {
     }
 
     public List<Pothole> getPotholesByUsername(String username) {
-        AppUser appUser = userRepository.findByUsername(username);
-        if (appUser == null) {
+        Optional<AppUser> appUser = userRepository.findByUsername(username);
+        if (appUser.isEmpty()) {
             throw new RuntimeException("User not found");
         }
-        return potholeRepository.findByAppUser(appUser);
+        return potholeRepository.findByAppUser(appUser.get());
     }
 }

@@ -39,6 +39,10 @@ public class UserService {
         }
     }
 
+    public Optional<AppUser> getUserByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
     public Integer getIDbyEmail(String email) {
         AppUser user = userRepository.findByEmail(email);
         if (user != null) {
