@@ -15,7 +15,7 @@ public class SecurityConfig {
         return httpSecurity
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(registry -> {
-                registry.anyRequest().permitAll(); // Require authentication for all requests
+                registry.anyRequest().permitAll(); 
             })
             .addFilterBefore(new APIKeyFilter(), UsernamePasswordAuthenticationFilter.class) // Add the custom filter
             .build();

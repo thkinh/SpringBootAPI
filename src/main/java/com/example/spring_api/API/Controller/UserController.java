@@ -104,7 +104,7 @@ public class UserController {
                 UnverifiedUser user = new UnverifiedUser();
                 user.setEmail(email);
                 user.setvCode(verifyCode);
-                userService.addUnverifiedUser(user);
+                userService.saveUnverifiedUser(user);
                 return ResponseEntity.status(200).body(user.getId().toString());
             }
             return ResponseEntity.status(500).body("Couldn't send the email to client");
