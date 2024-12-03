@@ -27,7 +27,6 @@ dependencies {
     implementation 'org.springframework.security:spring-security-crypto:5.4.6'
     // PostgreSQL Driver
     runtimeOnly 'org.postgresql:postgresql'
-
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

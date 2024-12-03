@@ -21,7 +21,7 @@ public class APIKeyFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().write("Forbidden");
+            response.getWriter().write("\t======FORBIDDEN======\n\tPlease provide API key!!!\nCONTACTS\nemail: thkinh2008@gmail.com\nPhone:0905272847");
         }
     }
 }
